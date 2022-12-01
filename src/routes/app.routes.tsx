@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AppExplanation } from "../screens/AppExplanation";
 import { Start } from "../screens/Start";
 
 
@@ -14,6 +15,10 @@ export function AppRoutes(){
       <Screen 
         name="start"
         component={Start}
+      />
+      <Screen 
+        name="explanation"
+        component={AppExplanation}
       />
     </Navigator>
   )
