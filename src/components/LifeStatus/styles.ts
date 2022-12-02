@@ -17,10 +17,13 @@ export const Container = styled.View`
 
 export const Education = styled(LottieView)`
   width: 100px;
+  margin-left: 3px;
+  margin-top: 10px;
 `;
 
 export const Money = styled(LottieView)`
   width: 100px;
+  margin-top: 10px;
 `;
 export const WrapperRobot = styled.View`
   position: absolute;

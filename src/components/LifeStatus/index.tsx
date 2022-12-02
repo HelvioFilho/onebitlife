@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Container, Education, Money, Robot, WrapperRobot } from './styles';
 
 import educationAnimated from "../../assets/education/education-100.json";
