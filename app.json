@@ -3,8 +3,20 @@
     "name": "One Bit Life",
     "slug": "onebitlife",
     "version": "1.0.0",
+    "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "splash": {
+      "image": "./src/assets/image/splash.png",
+      "backgroundColor": "#181818",
+      "resizeMode": "contain"
+    },
+    "android": {
+      "package": "com.onebitlife"
+    },
+    "ios": {
+      "bundleIdentifier": "com.onebitlife"
+    }
   }
 }
