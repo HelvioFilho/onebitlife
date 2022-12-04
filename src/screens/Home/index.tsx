@@ -9,7 +9,7 @@ import { LifeStatus } from '../../components/LifeStatus';
 
 import { Container, DailyChecks, ExplanationText, Wrapper } from './styles';
 
-interface HabitProps {
+export interface HabitProps {
   name: string;
   check: boolean;
   area: string;
