@@ -5,27 +5,26 @@ import habitData from '../../../services/habitData';
 import { Arrow } from './styles';
 import arrowDown from '../../../assets/icons/arrowDropdown.png';
 
-enum Habit {
+enum HabitStatus {
   Mente = 'dataMind',
   Financeiro = 'dataMoney',
   Corpo = 'dataBody',
   Humor = 'dataFun',
 }
 
-
 interface SelectProps {
-  habit: Habit;
+  habit: string;
   habitInput: (name: string) => void;
 }
 
 export function SelectHabit({ habit, habitInput }: SelectProps) {
-  const [selected, setSelected] = useState(habit ? habit : "-");
+  const [selected, setSelected] = useState("-");
   const [data, setData] = useState([]);
   const { colors } = useTheme();
 
   useEffect(() => {
-    setData(habitData[habit])
-    habitInput(habit ? habit : undefined);
+    setData(habitData[HabitStatus[habit]]);
+    // habitInput(habit ? habit : undefined);
   }, []);
 
   return (
