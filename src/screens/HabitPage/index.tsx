@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native';
 
 import arrowBack from '../../assets/icons/arrowBack.png';
 import { DefaultButton } from '../../components/DefaultButton';
+import { Notification } from '../../components/Home/Notification';
 import { SelectHabit } from '../../components/Home/SelectHabit';
 import { HabitProps } from '../Home';
 
@@ -29,6 +30,7 @@ interface RouteParams {
 export function HabitPage() {
   const [habitInput, setHabitInput] = useState('');
   const [frequencyInput, setFrequencyInput] = useState('');
+  const [notification, setNotification] = useState(false);
   const { goBack } = useNavigation();
   const { params } = useRoute();
   const { create, habit } = params as RouteParams;
@@ -61,7 +63,14 @@ export function HabitPage() {
             habit="Frequency"
             habitInput={setFrequencyInput}
           />
-
+          {
+            frequencyInput === 'Mensal' ?
+              null :
+              <Notification
+                notification={notification}
+                notificationToggle={setNotification}
+              />
+          }
           {
             create ?
               <CreateButton>
