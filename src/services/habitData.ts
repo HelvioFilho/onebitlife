@@ -106,4 +106,18 @@ const dataFun = [
   },
 ];
 
-export default { dataMind, dataMoney, dataBody, dataFun };
+const frequency = [
+  {
+    key: "Diário",
+    value: "Diário"
+  },
+  {
+    key: "Semanal",
+    value: "Semanal"
+  },
+  {
+    key: "Mensal",
+    value: "Mensal"
+  },
+];
+export default { dataMind, dataMoney, dataBody, dataFun, frequency };

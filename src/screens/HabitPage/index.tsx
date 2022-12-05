@@ -28,7 +28,7 @@ interface RouteParams {
 
 export function HabitPage() {
   const [habitInput, setHabitInput] = useState('');
-
+  const [frequencyInput, setFrequencyInput] = useState('');
   const { goBack } = useNavigation();
   const { params } = useRoute();
   const { create, habit } = params as RouteParams;
@@ -57,7 +57,10 @@ export function HabitPage() {
             habitInput={setHabitInput}
           />
           <InputText>Frequência</InputText>
-          {/* selectFrequency */}
+          <SelectHabit
+            habit="Frequency"
+            habitInput={setFrequencyInput}
+          />
 
           {
             create ?

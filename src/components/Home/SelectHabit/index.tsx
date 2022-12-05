@@ -10,6 +10,7 @@ enum HabitStatus {
   Financeiro = 'dataMoney',
   Corpo = 'dataBody',
   Humor = 'dataFun',
+  Frequency = 'frequency'
 }
 
 interface SelectProps {
@@ -50,7 +51,7 @@ export function SelectHabit({ habit, habitInput }: SelectProps) {
       }}
       dropdownTextStyles={{ color: colors.gray }}
       arrowicon={
-        <Arrow 
+        <Arrow
           source={arrowDown}
         />
       }
