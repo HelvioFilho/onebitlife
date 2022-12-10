@@ -6,6 +6,7 @@ import arrowBack from '../../assets/icons/arrowBack.png';
 import { DefaultButton } from '../../components/DefaultButton';
 import { Notification } from '../../components/Home/Notification';
 import { SelectHabit } from '../../components/Home/SelectHabit';
+import { TimeDataPicker } from '../../components/Home/TimeDataPicker';
 import { HabitProps } from '../Home';
 
 import {
@@ -31,6 +32,9 @@ export function HabitPage() {
   const [habitInput, setHabitInput] = useState('');
   const [frequencyInput, setFrequencyInput] = useState('');
   const [notification, setNotification] = useState(false);
+  const [dayNotification, setDayNotification] = useState('');
+  const [timeNotification, setTimeNotification] = useState('');
+
   const { goBack } = useNavigation();
   const { params } = useRoute();
   const { create, habit } = params as RouteParams;
@@ -70,6 +74,16 @@ export function HabitPage() {
                 notification={notification}
                 notificationToggle={setNotification}
               />
+          }
+          {
+            notification && frequencyInput !== "Mensal" &&
+            <TimeDataPicker
+              frequency={frequencyInput}
+              dayNotification={dayNotification}
+              timeNotification={timeNotification}
+              setDayNotification={setDayNotification}
+              setTimeNotification={setTimeNotification}
+            />
           }
           {
             create ?

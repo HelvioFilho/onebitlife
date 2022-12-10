@@ -1,6 +1,7 @@
 export default {
   colors: {
     background: "rgba(21,21,21, 0.98)",
+    modal: "rgba(0,0,0, 0.8)",
     gray: "#BBBBBB",
     ios: "#3E3E3E",
     white: "#FFFFFF",
