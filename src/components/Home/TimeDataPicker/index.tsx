@@ -37,7 +37,6 @@ export function TimeDataPicker({
   const [mode, setMode] = useState<AndroidMode>("date");
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState("-");
-  const [notificationDate, setNotificationDate] = useState("");
   const [notificationTime, setNotificationTime] = useState("");
 
   const { colors } = useTheme();
@@ -70,7 +69,6 @@ export function TimeDataPicker({
 
     const timeNotification = `${notificationHour}:${notificationMin}`;
 
-    setNotificationDate(dateNotification)
     setNotificationTime(timeNotification);
 
     if (frequency === "Diário") {
@@ -88,7 +86,7 @@ export function TimeDataPicker({
 
   useEffect(() => {
     if (dayNotification && timeNotification) {
-      setNotificationDate(dayNotification);
+      setSelected(dayNotification ? dayNotification : "-");
       setNotificationTime(timeNotification);
     }
   })
@@ -133,8 +131,8 @@ export function TimeDataPicker({
       </Button>
       <TextContainer>
         {
-          frequency === 'Diário' &&
-          <NotificationText>Dia do hábito: Diário</NotificationText>
+          frequency === "Semanal" &&
+          <NotificationText>Dia do hábito: {selected !== "-" && selected}</NotificationText>
         }
         <NotificationText>Horário do hábito: {notificationTime}</NotificationText>
       </TextContainer>
