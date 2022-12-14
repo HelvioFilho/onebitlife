@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { ScrollView } from 'react-native';
+import { Modal, ScrollView } from 'react-native';
 
 import arrowBack from '../../assets/icons/arrowBack.png';
 import { DefaultButton } from '../../components/DefaultButton';
@@ -20,6 +20,8 @@ import {
   Title,
   Wrapper
 } from './styles';
+import { CustomModal } from '../../components/CustomModal';
+import { useTheme } from 'styled-components';
 
 interface RouteParams {
   create: boolean;
@@ -34,17 +36,21 @@ export function HabitPage() {
   const [notification, setNotification] = useState(false);
   const [dayNotification, setDayNotification] = useState('');
   const [timeNotification, setTimeNotification] = useState('');
+  const [textWarn, setTextWarn] = useState('');
+  const [show, setShow] = useState(false);
 
   const { goBack, navigate } = useNavigation();
+  const { colors } = useTheme();
   const { params } = useRoute();
-  const { habit } = params as RouteParams;
-  const create = false;
+  const { create, habit } = params as RouteParams;
 
   function handleCreateHabit() {
     if (!habitInput || !frequencyInput) {
-      console.log("Você precisa selecionar um hábito e frequência para continuar");
+      setShow(true);
+      setTextWarn("Você precisa selecionar um hábito e frequência para continuar");
     } else if (notification && frequencyInput === "Diário" && !timeNotification) {
-      console.log("Você precisa dizer a frequência e o horário da notificação");
+      setShow(true);
+      setTextWarn("Você precisa dizer a frequência e o horário da notificação");
     } else {
       console.log("vai para navegação");
       // navigate("home", {
@@ -55,9 +61,11 @@ export function HabitPage() {
 
   function handleUpdateHabit() {
     if (notification && !dayNotification && !timeNotification) {
-      console.log("Você precisa colocar a frequência e o horário da notificação");
+      setShow(true);
+      setTextWarn("Você precisa colocar a frequência e o horário da notificação");
     } else {
-      console.log("update realizado com sucesso!");
+      setShow(true);
+      setTextWarn("update realizado com sucesso!");
       // navigate("home", {
       //   updatedHabit: `Updated in ${habit.habitArea}`
       // });
@@ -126,6 +134,24 @@ export function HabitPage() {
               />
           }
         </Wrapper>
+        <Modal
+          animationType="fade"
+          visible={show}
+          transparent={true}
+        >
+          <CustomModal
+            type="Default"
+            closeModal={() => setShow(false)}
+            text={textWarn}
+            button={[
+              {
+                title: "Confirmar",
+                color: colors.success,
+                close: true,
+              }
+            ]}
+          />
+        </Modal>
       </ScrollView>
     </Container>
   );
