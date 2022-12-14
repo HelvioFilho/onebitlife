@@ -1,16 +1,33 @@
-import { AndroidNativeProps, IOSNativeProps, WindowsNativeProps } from '@react-native-community/datetimepicker';
-import React, { FC } from 'react';
-import { Text, View } from 'react-native';
+import React from 'react';
 import { useTheme } from 'styled-components';
 
-import { ButtonModal, Close, Container, ContainerPicker, Content, ContentText, Footer, IconX, Title } from './styles';
+import {
+  ButtonModal,
+  Close,
+  Container,
+  ContainerPicker,
+  Content,
+  ContentText,
+  Footer,
+  IconX,
+  TextWarn,
+  Title
+} from './styles';
 
 interface CustomModalProps {
-  children: React.ReactNode
+  children?: React.ReactNode;
+  type: 'Default' | 'timePicker';
+  text?: string;
+  button: {
+    title: string;
+    color: string;
+    close: boolean;
+  }[];
   closeModal: () => void;
+  defaultFunction?: () => void;
 }
 
-export function CustomModal({ children, closeModal }: CustomModalProps) {
+export function CustomModal({ children, closeModal, type, text, button, defaultFunction }: CustomModalProps) {
   const { colors } = useTheme();
   return (
     <Container>
@@ -25,16 +42,29 @@ export function CustomModal({ children, closeModal }: CustomModalProps) {
           />
         </Close>
         <Content>
-          <ContentText>Mude o horário: </ContentText>
-          {children}
+          {
+            type === "Default" ?
+              <TextWarn>
+                {text}
+              </TextWarn> :
+              <>
+                <ContentText>Mude o horário: </ContentText>
+                {children}
+              </>
+          }
         </Content>
         <Footer>
-          <ButtonModal
-            onPress={closeModal}
-            color={colors.success}
-          >
-            <Title>Confirmar</Title>
-          </ButtonModal>
+          {
+            button.map((item) => (
+              <ButtonModal
+                key={item.title}
+                color={item.color}
+                onPress={item.close ? closeModal : defaultFunction}
+              >
+                <Title>{item.title}</Title>
+              </ButtonModal>
+            ))
+          }
         </Footer>
       </ContainerPicker>
     </Container>

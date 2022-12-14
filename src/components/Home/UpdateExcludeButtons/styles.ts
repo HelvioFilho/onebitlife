@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex-direction: row;
-  margin-bottom: 20;
+  margin-bottom: 20px;
 `;
 
 export const UpdateButton = styled.TouchableOpacity`
@@ -25,8 +25,12 @@ export const UpdateButtonText = styled.Text`
 `;
 
 export const TrashButton = styled.TouchableOpacity`
+  width: 90px;
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.body};
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const TrashIcon = styled(Image)`

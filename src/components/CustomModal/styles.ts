@@ -40,6 +40,13 @@ export const Content = styled.View`
   padding-top: 40px;
 `;
 
+export const TextWarn = styled.Text`
+  width: 90%;
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${RFValue(14)}px;
+  padding-bottom: 20px;
+`;
+
 export const ContentText = styled.Text`
   font-size: ${RFValue(16)}px;
   font-weight: bold;
@@ -50,6 +57,7 @@ export const Footer = styled.View`
   width: 90%;
   height: 50px;
   padding: 20px 30px;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
 `;

@@ -157,6 +157,14 @@ export function TimeDataPicker({
           >
             <CustomModal
               closeModal={() => setShow(false)}
+              type="timePicker"
+              button={[
+                {
+                  title: "Confirmar",
+                  color: colors.success,
+                  close: true,
+                }
+              ]}
             >
               <DateTimePicker
                 testID="DateTimePicker"

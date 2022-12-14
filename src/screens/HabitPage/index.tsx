@@ -37,10 +37,10 @@ export function HabitPage() {
 
   const { goBack, navigate } = useNavigation();
   const { params } = useRoute();
-  const { create, habit } = params as RouteParams;
+  const { habit } = params as RouteParams;
+  const create = false;
 
   function handleCreateHabit() {
-
     if (!habitInput || !frequencyInput) {
       console.log("Você precisa selecionar um hábito e frequência para continuar");
     } else if (notification && frequencyInput === "Diário" && !timeNotification) {
@@ -57,6 +57,7 @@ export function HabitPage() {
     if (notification && !dayNotification && !timeNotification) {
       console.log("Você precisa colocar a frequência e o horário da notificação");
     } else {
+      console.log("update realizado com sucesso!");
       // navigate("home", {
       //   updatedHabit: `Updated in ${habit.habitArea}`
       // });
@@ -115,7 +116,7 @@ export function HabitPage() {
                 <DefaultButton
                   title="Criar"
                   style={{ width: 250, height: 50 }}
-                  handlePress={handleUpdateHabit}
+                  handlePress={handleCreateHabit}
                 />
               </CreateButton> :
               <UpdateExcludeButtons
