@@ -4,6 +4,8 @@ export declare global {
       explanation: undefined;
       home: {
         excludeArea?: string;
+        createHabit?: string;
+        updatedHabit?: string;
       };
       habitPage: {
         create: boolean,

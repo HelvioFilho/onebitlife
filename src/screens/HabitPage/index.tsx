@@ -1,5 +1,5 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
 
 import arrowBack from '../../assets/icons/arrowBack.png';
@@ -7,18 +7,18 @@ import { DefaultButton } from '../../components/DefaultButton';
 import { Notification } from '../../components/Home/Notification';
 import { SelectHabit } from '../../components/Home/SelectHabit';
 import { TimeDataPicker } from '../../components/Home/TimeDataPicker';
-import { HabitProps } from '../Home';
+import { UpdateExcludeButtons } from '../../components/Home/UpdateExcludeButtons';
 
 import {
-  Container,
-  BackPage,
-  ArrowBack,
-  Wrapper,
-  Title,
-  InputText,
-  InputContainer,
   Area,
+  ArrowBack,
+  BackPage,
+  Container,
   CreateButton,
+  InputContainer,
+  InputText,
+  Title,
+  Wrapper
 } from './styles';
 
 interface RouteParams {
@@ -35,9 +35,33 @@ export function HabitPage() {
   const [dayNotification, setDayNotification] = useState('');
   const [timeNotification, setTimeNotification] = useState('');
 
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const { params } = useRoute();
   const { create, habit } = params as RouteParams;
+
+  function handleCreateHabit() {
+
+    if (!habitInput || !frequencyInput) {
+      console.log("Você precisa selecionar um hábito e frequência para continuar");
+    } else if (notification && frequencyInput === "Diário" && !timeNotification) {
+      console.log("Você precisa dizer a frequência e o horário da notificação");
+    } else {
+      console.log("vai para navegação");
+      // navigate("home", {
+      //   createHabit: `Created in ${habit.habitArea}`
+      // });
+    }
+  }
+
+  function handleUpdateHabit() {
+    if (notification && !dayNotification && !timeNotification) {
+      console.log("Você precisa colocar a frequência e o horário da notificação");
+    } else {
+      // navigate("home", {
+      //   updatedHabit: `Updated in ${habit.habitArea}`
+      // });
+    }
+  }
 
   return (
     <Container>
@@ -91,10 +115,14 @@ export function HabitPage() {
                 <DefaultButton
                   title="Criar"
                   style={{ width: 250, height: 50 }}
-                  handlePress={() => { }}
+                  handlePress={handleUpdateHabit}
                 />
               </CreateButton> :
-              <></>
+              <UpdateExcludeButtons
+                handleUpdate={handleUpdateHabit}
+                habitArea={habit.habitArea}
+                habitInput={habitInput}
+              />
           }
         </Wrapper>
       </ScrollView>
