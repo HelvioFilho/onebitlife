@@ -10,10 +10,36 @@ db.transaction((tx) => {
     "CREATE TABLE IF NOT EXISTS change_navigation (id INTEGER PRIMARY KEY AUTOINCREMENT, showHome TEXT, appStartData TEXT);",
     [],
     (_, error) => {
-      console.log(error)
+      console.log(error);
     }
   );
 });
+
+interface ShowHomeProps {
+    showHome: string;
+}
+
+function checkShowHome(id): Promise<ShowHomeProps>{
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM change_navigation where id=?;",
+        [id],
+        (_, {rows}) => {
+          if(rows.length > 0){
+            resolve(rows._array[0]);
+          }else{
+            reject(`Obj not found: id=${id}`);
+          }
+        },
+        (_, error) => {
+          reject(error);
+          return true;
+        }
+      )
+    });
+  });
+}
 
 function setShowHome(obj: ShowProps) {
   return new Promise((resolve, reject) => {
@@ -36,5 +62,6 @@ function setShowHome(obj: ShowProps) {
 }
 
 export default {
-  setShowHome
+  setShowHome,
+  checkShowHome
 }

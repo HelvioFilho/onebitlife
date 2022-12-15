@@ -4,8 +4,9 @@ import { HabitPage } from "../screens/HabitPage";
 import { Home } from "../screens/Home";
 import { Start } from "../screens/Start";
 
+const { Navigator, Screen } = createNativeStackNavigator();
+
 export function StartRoute() {
-  const { Navigator, Screen } = createNativeStackNavigator();
 
   return (
     <Navigator
@@ -18,15 +19,22 @@ export function StartRoute() {
         component={Start}
       />
       <Screen
+        name="home"
+        component={Home}
+      />
+      <Screen
         name="explanation"
         component={AppExplanation}
+      />
+      <Screen
+        name="habitPage"
+        component={HabitPage}
       />
     </Navigator>
   )
 }
 
 export function AppRoutes() {
-  const { Navigator, Screen } = createNativeStackNavigator();
 
   return (
     <Navigator
