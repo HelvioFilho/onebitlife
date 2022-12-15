@@ -4,6 +4,26 @@ import { HabitPage } from "../screens/HabitPage";
 import { Home } from "../screens/Home";
 import { Start } from "../screens/Start";
 
+export function StartRoute() {
+  const { Navigator, Screen } = createNativeStackNavigator();
+
+  return (
+    <Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Screen
+        name="start"
+        component={Start}
+      />
+      <Screen
+        name="explanation"
+        component={AppExplanation}
+      />
+    </Navigator>
+  )
+}
 
 export function AppRoutes() {
   const { Navigator, Screen } = createNativeStackNavigator();
