@@ -1,11 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { useTheme } from 'styled-components';
 import { CreateHabit } from '../../components/Home/CreateHabit';
 import { EditHabit } from '../../components/Home/EditHabit';
 import { StatusBar } from '../../components/Home/StatusBar';
 import { LifeStatus } from '../../components/LifeStatus';
+import ChangeNavigation from '../../services/ChangeNavigation';
 
 import { Container, DailyChecks, ExplanationText, Wrapper } from './styles';
 
@@ -24,16 +25,30 @@ export function Home() {
   const [moneyHabit, setMoneyHabit] = useState({} as HabitProps);
   const [bodyHabit, setBodyHabit] = useState({} as HabitProps);
   const [funHabit, setFunHabit] = useState({} as HabitProps);
+  const [robotDaysLife, setRobotDaysLife] = useState('');
 
   const { navigate } = useNavigation();
+  const { checkShowHome } = ChangeNavigation;
   const { colors } = useTheme();
+  const { params } = useRoute();
+  const today = new Date();
+
+  useEffect(()=> {
+    checkShowHome(1)
+    .then((data) => {
+      const startDate = new Date(data.appStartData);
+      const checkDays = today.getTime() - startDate.getTime();
+      setRobotDaysLife(Math.trunc(checkDays/(1000 * 60 * 60 *24)+1).toString().padStart(2, "0"));
+    })
+    .catch((error) => console.log(error));
+  },[params]);
 
   return (
     <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Wrapper>
           <DailyChecks>
-            ❤️ 20 dias - ✓ 80 checks
+            ❤️ {robotDaysLife} {robotDaysLife === "01" ? "dia" : "dias"} - ✓ 80 checks
           </DailyChecks>
           <LifeStatus />
           <StatusBar />

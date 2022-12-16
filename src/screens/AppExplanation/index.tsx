@@ -12,7 +12,7 @@ export function AppExplanation() {
   const [isShowHome, setIsShowHome] = useState(false);
   const { setShowHome } = ChangeNavigation;
   const startDate = new Date();
-  const appStartData = `${startDate.getFullYear()}-${startDate.getMonth()}-${startDate.getDate()}`;
+  const appStartData = `${startDate.getFullYear()}-${startDate.getMonth()+1}-${startDate.getDate()}`;
 
   function handleSetShowHome(){
     if(!isShowHome){

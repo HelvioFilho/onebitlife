@@ -15,11 +15,7 @@ db.transaction((tx) => {
   );
 });
 
-interface ShowHomeProps {
-    showHome: string;
-}
-
-function checkShowHome(id): Promise<ShowHomeProps>{
+function checkShowHome(id): Promise<ShowProps>{
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
